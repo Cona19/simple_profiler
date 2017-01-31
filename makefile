@@ -1,0 +1,29 @@
+OBJ_CONFIG = config.o
+OBJ_PROFILER = profiler.o
+
+TARGET_PROFILER = profiler
+
+C_FLAGS_INC =  
+C_FLAGS_OPTS =  -g #-O2
+CC_FLAGS_OPTS = -std=c++11
+
+
+LD_FLAGS_DEFS =  
+LD_FLAGS_OPTS = 
+LD_FLAGS_AR =  
+C_FLAGS = $(C_FLAGS_INC) $(C_FLAGS_OPTS)
+CC_FLAGS = $(C_FLAGS_INC) $(C_FLAGS_OPTS) $(CC_FLAGS_OPTS)
+
+.c.o: 
+	g++ -c $(CC_FLAGS) $<
+
+.cc.o: 
+	g++ -c $(CC_FLAGS) $<
+
+all : $(TARGET_PROFILER)
+
+$(TARGET_PROFILER) : $(OBJ_CONFIG) $(OBJ_PROFILER)
+	g++ $(LD_FLAGS_DEFS) -o $(TARGET_PROFILER) $(OBJ_CONFIG) $(OBJ_PROFILER) $(LD_FLAGS_AR) $(LD_FLAGS_OPTS)
+
+clean :
+	rm -f *.o $(TARGET_PROFILER)
